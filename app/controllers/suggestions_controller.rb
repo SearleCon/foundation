@@ -1,19 +1,13 @@
 class SuggestionsController < ApplicationController
+  respond_to :html
+
   def new
-    @suggestion = Suggestion.new
+    respond_with(@suggestion = Suggestion.new)
   end
 
   def create
     @suggestion = Suggestion.new(params[:suggestion])
-
-    respond_to do |format|
-      if @suggestion.save
-        format.html { redirect_to root_url, notice: 'Thank you for your suggestions' }
-        format.json { render json: @suggestion, status: :created, location: @suggestion }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @suggestion.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Thank you for your suggestion' if @suggestion.save
+    respond_with(@suggestion, :location => root_url)
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128182335) do
+ActiveRecord::Schema.define(:version => 20121129155110) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -29,6 +29,25 @@ ActiveRecord::Schema.define(:version => 20121128182335) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "payment_notifications", :force => true do |t|
+    t.text     "params"
+    t.integer  "user_id"
+    t.integer  "transaction_id"
+    t.string   "status"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "plans", :force => true do |t|
+    t.string   "name"
+    t.integer  "duration"
+    t.decimal  "price"
+    t.boolean  "active"
+    t.boolean  "is_free"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -44,10 +63,11 @@ ActiveRecord::Schema.define(:version => 20121128182335) do
   create_table "subscriptions", :force => true do |t|
     t.integer  "plan_id"
     t.integer  "user_id"
-    t.boolean  "active",      :default => false
+    t.boolean  "active",             :default => false
     t.date     "expiry_date"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.integer  "customer_paypal_id"
   end
 
   create_table "suggestions", :force => true do |t|

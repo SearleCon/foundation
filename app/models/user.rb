@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :subscriptions, :conditions => { :active => true}, :after_add => :activate_subscription
+
+  has_many :subscriptions, :conditions => { :active => true}, :before_add => :deactivate_current_subscription
 
   rolify
   # Include default devise modules. Others available are:
@@ -12,9 +13,9 @@ class User < ActiveRecord::Base
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
-  def activate_subscription(subscription)
-    previous = self.subscriptions.last
-    previous.toggle!(:active)
+  def deactivate_current_subscription(subscription)
+    expired = self.subscriptions.last
+    expired.toggle!(:active) unless expired.nil?
   end
   
 end

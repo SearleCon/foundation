@@ -5,16 +5,14 @@ class PaypalPayment
     @plan = Plan.find(subscription.plan_id)
   end
 
+#recurring payment methods
+=begin
   def profile_details
     process(:profile, profile_id: @subscription.paypal_recurring_profile_token)
   end
 
-  def checkout_details
-    process :checkout_details
-  end
-
-  def request_payment
-    process :request_payment
+  def make_recurring
+    process :create_recurring_profile, period: :monthly, frequency: 1, start_at: Time.zone.now
   end
 
   def suspend
@@ -28,20 +26,26 @@ class PaypalPayment
   def cancel
     process(:cancel, { profile_id: @subscription.paypal_recurring_profile_token })
   end
+=end
+
+  def checkout_details
+    process :checkout_details
+  end
+
+  def request_payment
+    process :request_payment
+  end
 
   def checkout_url(options)
     process(:checkout, options).checkout_url
   end
 
-  def make_recurring
-    process :create_recurring_profile, period: :monthly, frequency: 1, start_at: Time.zone.now
-  end
 
   private
   def process(action, options = {})
     options = options.reverse_merge(
         token: @subscription.paypal_payment_token,
-        payer_id: @subscription.paypal_customer_token,
+        payer_id: @subscription.customer_paypal_id,
         description: @plan.name,
         amount: @plan.price,
         currency: "USD",
