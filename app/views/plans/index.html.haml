@@ -1,0 +1,27 @@
+%h1 Listing plans
+
+%table
+  %tr
+    %th Name
+    %th Duration
+    %th Price
+    %th Active
+    %th Is free
+    %th
+    %th
+    %th
+
+  - @plans.each do |plan|
+    %tr
+      %td= plan.name
+      %td= plan.duration
+      %td= plan.price
+      %td= plan.active
+      %td= plan.is_free
+      %td= link_to 'Show', plan
+      %td= link_to 'Edit', edit_plan_path(plan)
+      %td= link_to 'Destroy', plan, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Plan', new_plan_path

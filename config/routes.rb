@@ -1,5 +1,7 @@
 Foundation::Application.routes.draw do
 
+  resources :plans, :only => [:index]
+
   authenticated :user do
     root :to => 'home#index'
   end

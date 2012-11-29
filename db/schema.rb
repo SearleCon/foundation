@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128143041) do
+ActiveRecord::Schema.define(:version => 20121128182335) do
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -23,6 +39,16 @@ ActiveRecord::Schema.define(:version => 20121128143041) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+  add_index "roles", ["resource_id"], :name => "index_roles_on_resource_id"
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "plan_id"
+    t.integer  "user_id"
+    t.boolean  "active",      :default => false
+    t.date     "expiry_date"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
 
   create_table "suggestions", :force => true do |t|
     t.string   "subject"
@@ -55,6 +81,8 @@ ActiveRecord::Schema.define(:version => 20121128143041) do
     t.integer "role_id"
   end
 
+  add_index "users_roles", ["role_id"], :name => "index_users_roles_on_role_id"
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+  add_index "users_roles", ["user_id"], :name => "index_users_roles_on_user_id"
 
 end

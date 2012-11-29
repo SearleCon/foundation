@@ -5,9 +5,11 @@ class AdminMailer < ActionMailer::Base
     @user = user
     mail to: @user.email, subject: "Welcome"
   end
+  handle_asynchronously :welcome
 
   def enquiry(message)
     @message = message
     mail to: message.receiver, subject: message.subject
   end
+  handle_asynchronously :enquiry
 end
