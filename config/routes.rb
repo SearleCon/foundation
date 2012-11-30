@@ -11,10 +11,10 @@ Foundation::Application.routes.draw do
   resources :suggestions, only: [:new, :create]
 
   resources :plans, :only => [:index] do
+    resources :subscriptions, :only => [:new, :create]
     get :paypal_check_out, on: :member
   end
 
-  resources :subscriptions, :only => [:new, :create]
 
   resources :payment_notifications, controller: 'payment_notification',  only: [:create]
 

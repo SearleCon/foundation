@@ -29,3 +29,4 @@ gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 gem "annotate", :group => [:development]
 gem 'delayed_job_active_record'
 gem 'paypal-recurring'
+gem 'localtunnel', :group => [:development]

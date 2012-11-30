@@ -43,7 +43,7 @@ module Foundation
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
     # Activate observers that should always be running.
-    config.active_record.observers = :user_observer
+    config.active_record.observers = :user_observer, :paypal_ipn_observer
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
@@ -78,5 +78,18 @@ module Foundation
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    #Use this to test the paypal notifications
+    #  if Rails.env.development?
+    #    tunnel = LocalTunnel::Tunnel.new(3000, nil)
+    #    response = tunnel.register_tunnel
+    #
+    #    # Start localtunnel in a detached process.
+    #    Process.detach fork { tunnel.start_tunnel }
+    #
+    #    ENV['LOCALTUNNEL'] = response['host']
+    #  end
+
+
   end
 end

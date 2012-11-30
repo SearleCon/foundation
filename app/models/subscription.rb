@@ -2,7 +2,7 @@ class Subscription < ActiveRecord::Base
   belongs_to :user
   belongs_to :plan
 
-  attr_accessible :expiry_date, :plan_id, :user_id, :active, :customer_paypal_id
+  attr_accessible :expiry_date, :plan_id, :user_id, :active, :customer_paypal_id, :paypal_payment_token
   attr_accessor :paypal_payment_token
 
   before_create :calculate_expiry_date
@@ -13,7 +13,12 @@ class Subscription < ActiveRecord::Base
 
   def save_with_paypal_payment
     response = paypal.request_payment
-    response.approved? && response.success? ? save : false
+    if response.approved? && response.success?
+      self.active = true
+      save
+    else
+      false
+    end
   end
 
   def payment_provided?
@@ -44,6 +49,6 @@ end
 #  expiry_date        :date
 #  created_at         :datetime        not null
 #  updated_at         :datetime        not null
-#  customer_paypal_id :integer
+#  customer_paypal_id :string(255)
 #
 

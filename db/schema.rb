@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121129155110) do
+ActiveRecord::Schema.define(:version => 20121130112524) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(:version => 20121129155110) do
     t.date     "expiry_date"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
-    t.integer  "customer_paypal_id"
+    t.string   "customer_paypal_id"
   end
 
   create_table "suggestions", :force => true do |t|

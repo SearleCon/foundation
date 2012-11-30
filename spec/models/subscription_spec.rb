@@ -14,6 +14,6 @@ end
 #  expiry_date        :date
 #  created_at         :datetime        not null
 #  updated_at         :datetime        not null
-#  customer_paypal_id :integer
+#  customer_paypal_id :string(255)
 #
 
