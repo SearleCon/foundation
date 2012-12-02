@@ -24,7 +24,7 @@ describe PlansController do
   # Plan. As you add validations to Plan, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "name" => "MyString" }
+    { "name" => "MyString", "duration" => 1, "price" => 1, "active" => true, "is_free" => false }
   end
 
   # This should return the minimal set of values that should be in the session

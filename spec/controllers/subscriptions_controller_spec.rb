@@ -19,6 +19,9 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe SubscriptionsController do
+  before(:each) do
+    @plan = FactoryGirl.create(:plan, active: true)
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Subscription. As you add validations to Subscription, be sure to
@@ -36,29 +39,30 @@ describe SubscriptionsController do
 
   describe "GET new" do
     it "assigns a new subscription as @subscription" do
-      get :new, {}, valid_session
+      get :new, { :plan_id => @plan.id}, valid_session
       assigns(:subscription).should be_a_new(Subscription)
     end
   end
 
 
   describe "POST create" do
+
     describe "with valid params" do
       it "creates a new Subscription" do
         expect {
-          post :create, {:subscription => valid_attributes}, valid_session
+          post :create, {:subscription => valid_attributes, :plan_id => @plan.id}, valid_session
         }.to change(Subscription, :count).by(1)
       end
 
       it "assigns a newly created subscription as @subscription" do
-        post :create, {:subscription => valid_attributes}, valid_session
+        post :create, {:subscription => valid_attributes, :plan_id => @plan.id}, valid_session
         assigns(:subscription).should be_a(Subscription)
         assigns(:subscription).should be_persisted
       end
 
       it "redirects to the created subscription" do
-        post :create, {:subscription => valid_attributes}, valid_session
-        response.should redirect_to(Subscription.last)
+        post :create, {:subscription => valid_attributes, :plan_id => @plan.id}, valid_session
+        response.should redirect_to(root_url)
       end
     end
 
@@ -66,14 +70,14 @@ describe SubscriptionsController do
       it "assigns a newly created but unsaved subscription as @subscription" do
         # Trigger the behavior that occurs when invalid params are submitted
         Subscription.any_instance.stub(:save).and_return(false)
-        post :create, {:subscription => {  }}, valid_session
+        post :create, {:subscription => {  }, :plan_id => @plan.id}, valid_session
         assigns(:subscription).should be_a_new(Subscription)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Subscription.any_instance.stub(:save).and_return(false)
-        post :create, {:subscription => {  }}, valid_session
+        post :create, {:subscription => {  }, :plan_id => @plan.id}, valid_session
         response.should render_template("new")
       end
     end

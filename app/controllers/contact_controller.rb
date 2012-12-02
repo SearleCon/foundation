@@ -6,7 +6,7 @@ class ContactController < ApplicationController
 
   def create
     if @message.valid?
-      AdminMailer.enquiry(@message)
+      AdminMailer.delay.enquiry(@message)
       redirect_to root_url, notice: 'Email was sent successfully'
     else
       render :new, alert: 'Please fill in all details'
