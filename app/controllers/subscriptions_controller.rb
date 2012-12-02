@@ -24,7 +24,7 @@ class SubscriptionsController < ApplicationController
       flash[:notice] = 'Thank you for your payment, your subscription has been activated.'
     end
 
-    respond_with(@subscription, :location => root_url)
+    respond_with(:location => root_url)
   end
 
 

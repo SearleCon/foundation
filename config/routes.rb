@@ -39,39 +39,41 @@ end
 # use command 'annotate --routes' in your console to generate the list of routes below courtesy of Annotate gem
 
 #== Route Map
-# Generated on 29 Nov 2012 12:35
+# Generated on 02 Dec 2012 12:57
 #
-#                     root        /                               home#index
-#         new_user_session GET    /users/sign_in(.:format)        devise/sessions#new
-#             user_session POST   /users/sign_in(.:format)        devise/sessions#create
-#     destroy_user_session DELETE /users/sign_out(.:format)       devise/sessions#destroy
-#            user_password POST   /users/password(.:format)       devise/passwords#create
-#        new_user_password GET    /users/password/new(.:format)   devise/passwords#new
-#       edit_user_password GET    /users/password/edit(.:format)  devise/passwords#edit
-#                          PUT    /users/password(.:format)       devise/passwords#update
-# cancel_user_registration GET    /users/cancel(.:format)         devise/registrations#cancel
-#        user_registration POST   /users(.:format)                devise/registrations#create
-#    new_user_registration GET    /users/sign_up(.:format)        devise/registrations#new
-#   edit_user_registration GET    /users/edit(.:format)           devise/registrations#edit
-#                          PUT    /users(.:format)                devise/registrations#update
-#                          DELETE /users(.:format)                devise/registrations#destroy
-#                    users GET    /users(.:format)                users#index
-#                          POST   /users(.:format)                users#create
-#                 new_user GET    /users/new(.:format)            users#new
-#                edit_user GET    /users/:id/edit(.:format)       users#edit
-#                     user GET    /users/:id(.:format)            users#show
-#                          PUT    /users/:id(.:format)            users#update
-#                          DELETE /users/:id(.:format)            users#destroy
-#              suggestions POST   /suggestions(.:format)          suggestions#create
-#           new_suggestion GET    /suggestions/new(.:format)      suggestions#new
-#                    plans GET    /plans(.:format)                plans#index
-#            subscriptions POST   /subscriptions(.:format)        subscriptions#create
-#         new_subscription GET    /subscriptions/new(.:format)    subscriptions#new
-#               contact_us GET    /contact_us(.:format)           contact#new
-#       send_contact_email POST   /send_contact_email(.:format)   contact#create
-#     terms_and_conditions GET    /terms_and_conditions(.:format) static_pages#terms_and_conditions
-#           privacy_policy GET    /privacy_policy(.:format)       static_pages#privacy_policy
-#                      faq GET    /faq(.:format)                  static_pages#faq
-#                    about GET    /about(.:format)                static_pages#about
-#                  pricing GET    /pricing(.:format)              static_pages#pricing
-#                                 /*path(.:format)                application#routing_error
+#                     root        /                                           home#index
+#         new_user_session GET    /users/sign_in(.:format)                    sessions#new
+#             user_session POST   /users/sign_in(.:format)                    sessions#create
+#     destroy_user_session DELETE /users/sign_out(.:format)                   sessions#destroy
+#            user_password POST   /users/password(.:format)                   devise/passwords#create
+#        new_user_password GET    /users/password/new(.:format)               devise/passwords#new
+#       edit_user_password GET    /users/password/edit(.:format)              devise/passwords#edit
+#                          PUT    /users/password(.:format)                   devise/passwords#update
+# cancel_user_registration GET    /users/cancel(.:format)                     devise/registrations#cancel
+#        user_registration POST   /users(.:format)                            devise/registrations#create
+#    new_user_registration GET    /users/sign_up(.:format)                    devise/registrations#new
+#   edit_user_registration GET    /users/edit(.:format)                       devise/registrations#edit
+#                          PUT    /users(.:format)                            devise/registrations#update
+#                          DELETE /users(.:format)                            devise/registrations#destroy
+#                    users GET    /users(.:format)                            users#index
+#                          POST   /users(.:format)                            users#create
+#                 new_user GET    /users/new(.:format)                        users#new
+#                edit_user GET    /users/:id/edit(.:format)                   users#edit
+#                     user GET    /users/:id(.:format)                        users#show
+#                          PUT    /users/:id(.:format)                        users#update
+#                          DELETE /users/:id(.:format)                        users#destroy
+#              suggestions POST   /suggestions(.:format)                      suggestions#create
+#           new_suggestion GET    /suggestions/new(.:format)                  suggestions#new
+#       plan_subscriptions POST   /plans/:plan_id/subscriptions(.:format)     subscriptions#create
+#    new_plan_subscription GET    /plans/:plan_id/subscriptions/new(.:format) subscriptions#new
+#    paypal_check_out_plan GET    /plans/:id/paypal_check_out(.:format)       plans#paypal_check_out
+#                    plans GET    /plans(.:format)                            plans#index
+#    payment_notifications POST   /payment_notifications(.:format)            payment_notification#create
+#               contact_us GET    /contact_us(.:format)                       contact#new
+#       send_contact_email POST   /send_contact_email(.:format)               contact#create
+#     terms_and_conditions GET    /terms_and_conditions(.:format)             static_pages#terms_and_conditions
+#           privacy_policy GET    /privacy_policy(.:format)                   static_pages#privacy_policy
+#                      faq GET    /faq(.:format)                              static_pages#faq
+#                    about GET    /about(.:format)                            static_pages#about
+#                  pricing GET    /pricing(.:format)                          static_pages#pricing
+#                                 /*path(.:format)                            application#routing_error

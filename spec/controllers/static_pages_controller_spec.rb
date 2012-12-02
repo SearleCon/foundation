@@ -30,11 +30,4 @@ describe StaticPagesController do
     end
   end
 
-  describe "GET 'contact_us'" do
-    it "returns http success" do
-      get 'contact_us'
-      response.should be_success
-    end
-  end
-
 end

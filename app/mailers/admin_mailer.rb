@@ -3,9 +3,8 @@ class AdminMailer < ActionMailer::Base
 
   def welcome(user)
     @user = user
-    mail to: @user.email, subject: "Welcome"
+    mail from: 'support@searleconsulting.co.za', to: @user.email, subject: "Welcome"
   end
-  handle_asynchronously :welcome
 
   def enquiry(message)
     @message = message

@@ -5,7 +5,7 @@ class UserObserver < ActiveRecord::Observer
   def after_create(user)
     free_trial_subscription = create_free_trial
     user.subscriptions << free_trial_subscription
-    AdminMailer.welcome(user)
+    AdminMailer.delay.welcome(user)
   end
 
 
