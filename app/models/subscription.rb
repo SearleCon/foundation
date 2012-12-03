@@ -5,35 +5,13 @@ class Subscription < ActiveRecord::Base
   attr_accessible :expiry_date, :plan_id, :user_id, :active, :customer_paypal_id, :paypal_payment_token
   attr_accessor :paypal_payment_token
 
-  before_create :calculate_expiry_date
-
   def has_expired?
     self.expiry_date <= Date.today
-  end
-
-  def save_with_paypal_payment
-    response = paypal.request_payment
-    if response.approved? && response.success?
-      self.active = true
-      save
-    else
-      false
-    end
   end
 
   def payment_provided?
     paypal_payment_token.present?
   end
-
-  def paypal
-    PaypalPayment.new(self)
-  end
-
-  private
-  def calculate_expiry_date
-    self.expiry_date = Time.now + self.plan.duration.months
-  end
-
 
 end
 

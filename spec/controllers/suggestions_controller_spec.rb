@@ -9,9 +9,9 @@ describe SuggestionsController do
     end
   end
 
-  describe "GET 'create'" do
+  describe "Post 'create'" do
     it "returns http success" do
-      get 'create'
+      post 'create'
       response.should be_success
     end
   end

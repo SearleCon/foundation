@@ -13,7 +13,8 @@ class PlansController < ApplicationController
   def paypal_check_out
     subscription = @plan.subscriptions.new
     subscription.user_id = current_user.id
-    redirect_to subscription.paypal.checkout_url(
+    paypal = PaypalPayment.new(subscription)
+    redirect_to paypal.checkout_url(
                     return_url: new_plan_subscription_url(@plan),
                     cancel_url: root_url, ipn_url: payment_notifications_url)
   end

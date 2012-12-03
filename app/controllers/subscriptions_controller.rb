@@ -19,12 +19,11 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions
   # POST /subscriptions.json
   def create
-    if @subscription.save_with_paypal_payment
+    if  @subscription.save
       current_user.subscriptions << @subscription
       flash[:notice] = 'Thank you for your payment, your subscription has been activated.'
     end
-
-    respond_with(:location => root_url)
+    respond_with(@subscription, :location => root_url)
   end
 
 

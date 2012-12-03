@@ -5,8 +5,8 @@ class PaymentNotificationController < ApplicationController
   def create
     if valid_ipn?
       PaymentNotification.create!(:params => params, :user_id => params[:reference], :status => params[:payment_status], :transaction_id => params[:txn_id])
-      render :nothing => true
     end
+    render :nothing => true
   end
 
   def valid_ipn?
