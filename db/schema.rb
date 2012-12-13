@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121130112524) do
+ActiveRecord::Schema.define(:version => 20121210153237) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -104,5 +104,14 @@ ActiveRecord::Schema.define(:version => 20121130112524) do
   add_index "users_roles", ["role_id"], :name => "index_users_roles_on_role_id"
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
   add_index "users_roles", ["user_id"], :name => "index_users_roles_on_user_id"
+
+  create_table "vouchers", :force => true do |t|
+    t.string   "unique_code"
+    t.integer  "redeemed_by"
+    t.datetime "valid_until"
+    t.integer  "number_of_days"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
 end

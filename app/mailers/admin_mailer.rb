@@ -8,6 +8,7 @@ class AdminMailer < ActionMailer::Base
 
   def enquiry(message)
     @message = message
-    mail to: "support@searleconsulting.co.za", subject: message.subject
+    mail to: "billing@searleconsulting.co.za", subject: message.subject
   end
+
 end
