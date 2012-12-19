@@ -24,6 +24,8 @@ class SubscriptionsController < ApplicationController
       flash[:notice] = 'Thank you for your payment, your subscription has been activated.'
     end
     respond_with(@subscription, :location => root_url)
+  rescue PaypalError => error
+    redirect_to root_url, :alert => error.message
   end
 
 
@@ -33,7 +35,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def new_resource
-     @subscription = @plan.subscriptions.new(params[:subscription])
+     @subscription = @plan.subscriptions.new(params[:subscription])  if @plan
   end
 
 end
